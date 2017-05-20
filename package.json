@@ -1,0 +1,15 @@
+{
+  "name": "spacegame",
+  "version": "0.0.1",
+  "description": "a stupid game pls kill me",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "marissaChan",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.6.8",
+    "electron-builder": "^17.8.0"
+  }
+}
