@@ -97,7 +97,6 @@ function resize() {
     if (typeof scene.resize === 'function') {
         scene.resize();
     }
-
 }
 
 function keyDown(e) {

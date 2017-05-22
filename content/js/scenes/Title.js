@@ -54,6 +54,10 @@ class Title {
                     if ((mouse.x >= this.menu[i].x && mouse.x <= this.menu[i].x + this.menu[i].width &&
                             (mouse.y >= this.menu[i].y && mouse.y <= this.menu[i].y + this.menu[i].height))) {
 
+                        if (i == 0) {
+                            scene = new GameScreen();
+                        }
+
                         // quit
                         if (i == 3) {
                             let window = remote.getCurrentWindow();
@@ -86,11 +90,26 @@ class Title {
         ctx.translate(-x, -y);
 
         ctx.textAlign = 'center';
-        ctx.font = "40px Arial";
+        ctx.font = "40px Verdana";
         for (let i = 0; i < this.menu.length; i++) {
             ctx.fillStyle = "#FFF";
             ctx.globalAlpha = this.menu[i].frame * 0.033 + 0.5;
-            ctx.fillRect(this.menu[i].x, this.menu[i].y, this.menu[i].width, this.menu[i].height);
+
+            let r = 20;
+
+            ctx.beginPath();
+            ctx.moveTo(this.menu[i].x + r, this.menu[i].y);
+            ctx.lineTo(this.menu[i].x + this.menu[i].width - r, this.menu[i].y);
+            ctx.quadraticCurveTo(this.menu[i].x + this.menu[i].width, this.menu[i].y, this.menu[i].x + this.menu[i].width, this.menu[i].y + r);
+            ctx.lineTo(this.menu[i].x + this.menu[i].width, this.menu[i].y + this.menu[i].height - r);
+            ctx.quadraticCurveTo(this.menu[i].x + this.menu[i].width, this.menu[i].y + this.menu[i].height, this.menu[i].x + this.menu[i].width - r, this.menu[i].y + this.menu[i].height);
+            ctx.lineTo(this.menu[i].x + r, this.menu[i].y + this.menu[i].height);
+            ctx.quadraticCurveTo(this.menu[i].x, this.menu[i].y + this.menu[i].height, this.menu[i].x, this.menu[i].y + this.menu[i].height - r);
+            ctx.lineTo(this.menu[i].x, this.menu[i].y + r);
+            ctx.quadraticCurveTo(this.menu[i].x, this.menu[i].y, this.menu[i].x + r, this.menu[i].y);
+            ctx.closePath();
+            ctx.fill();
+
             ctx.globalAlpha = 1;
             ctx.fillStyle = "#000";
             ctx.fillText(this.menu[i].text, this.menu[i].x + this.menu[i].width * 0.5, this.menu[i].y + 40);
