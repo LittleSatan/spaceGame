@@ -68,7 +68,6 @@ window.onload = function() {
 };
 
 function loop() {
-    let start = +new Date();
     if (state === 1) {
         scene.draw();
         scene.update();
@@ -78,12 +77,7 @@ function loop() {
         }
     }
     clearPressedKeys();
-    let end = +new Date();
-    if (end - start <= 0) {
-        setTimeout(window.requestAnimationFrame(loop), 0);
-    } else {
-        setTimeout(window.requestAnimationFrame(loop), fps - (end - start));
-    }
+    window.requestAnimationFrame(loop)
 }
 
 function resize() {
