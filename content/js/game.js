@@ -7,7 +7,7 @@ let fps = 60,
     scene,
     c, ctx,
     state = "init",
-    mouse = { x: 0, y: 0, leftButton: 0, rightButton: 0 },
+    mouse = { x: 0, y: 0, oldX: 0, oldY: 0, leftButton: 0, rightButton: 0 },
     keys;
 
 window.onload = function() {
@@ -69,13 +69,15 @@ window.onload = function() {
 
 function loop() {
     if (state === 1) {
-        scene.draw();
         scene.update();
+        scene.draw();
     } else {
         if (typeof scene.loading === 'function') {
             scene.loading();
         }
     }
+    mouse.oldX = mouse.x;
+    mouse.oldY = mouse.y;
     clearPressedKeys();
     window.requestAnimationFrame(loop)
 }

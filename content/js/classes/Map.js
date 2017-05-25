@@ -40,13 +40,13 @@ class Map {
     }
 
     draw() {
-
         // redraw player
         if ((scene.player.pos.x != scene.player.oldPos.x) || (scene.player.pos.y != scene.player.oldPos.y)) {
             ctx.drawImage(this.mapRendered, scene.player.oldPos.x, scene.player.oldPos.y, scene.player.width, scene.player.height, scene.player.oldPos.x, scene.player.oldPos.y, scene.player.width, scene.player.height);
         }
-
-        //        ctx.drawImage(this.mapRendered, 0, 0);
+        if ((mouse.oldX != mouse.x) || mouse.oldY != mouse.y) {
+            ctx.drawImage(this.mapRendered, mouse.oldX - 2, mouse.oldY - 2, 4, 4, mouse.oldX - 2, mouse.oldY - 2, 4, 4);
+        }
     }
 
 }

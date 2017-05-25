@@ -28,7 +28,12 @@ class GameScreen {
         this.player.update();
     }
 
+    loading() {
+        ctx.fillRect(0, 0, gwidth * this.state, gheight);
+    }
+
     draw() {
+        if (!this.map) return;
         this.map.draw();
         this.player.draw();
         if (mouse.leftButton === 3) ctx.fillStyle = "#F00";
