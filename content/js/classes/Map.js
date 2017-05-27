@@ -53,7 +53,6 @@ class Map {
     }
 
     draw() {
-        // redraw player
 
         let xOff;
         let yOff;

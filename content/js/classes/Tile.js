@@ -6,7 +6,6 @@ class Tile {
         this.pos = [x * this.tileSize, y * this.tileSize];
     }
 
-
     update() {
 
     }
