@@ -1,0 +1,1 @@
+simplex-noise.js - MIT License (enclosed) - jwagner: https://github.com/jwagner/simplex-noise.js
