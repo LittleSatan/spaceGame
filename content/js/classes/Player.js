@@ -4,7 +4,7 @@ class Player {
         this.oldPos = { x: 0, y: 0 };
         this.width = 30;
         this.height = 30;
-        this.speed = 2;
+        this.speed = 3;
     }
 
     update() {
@@ -16,9 +16,9 @@ class Player {
         if (keys[40] >= 2 && keys[38] <= 1) this.pos.y += this.speed;
     }
 
-    draw() {
+    draw(xOff, yOff) {
         ctx.fillStyle = "#F00";
-        ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
+        ctx.fillRect(this.pos.x - xOff, this.pos.y - yOff, this.width, this.height);
     }
 
 }

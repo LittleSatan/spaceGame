@@ -13,7 +13,7 @@ class GameScreen {
             scene.map = new Map(200, 200);
 
         }
-        this.tiles.src = "img/texture1.png";
+        this.tiles.src = "img/tileset/texture1.png";
 
     }
 

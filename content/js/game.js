@@ -1,4 +1,4 @@
-const remote = require('electron').remote;
+// const remote = require('electron').remote;
 
 let fps = 60,
     tileSize = 40,
