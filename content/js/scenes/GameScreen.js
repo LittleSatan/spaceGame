@@ -10,7 +10,7 @@ class GameScreen {
         this.tiles.onload = function() {
 
             state += 0.5;
-            scene.map = new Map(1000, 1000);
+            scene.map = new Map(500, 500);
 
         }
         this.tiles.src = "img/tileset/texture1.png";
@@ -24,8 +24,8 @@ class GameScreen {
     }
 
     update() {
-        this.map.update()
         this.player.update();
+        this.map.update()
     }
 
     loading() {

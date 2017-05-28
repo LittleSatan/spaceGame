@@ -10,10 +10,13 @@ class Player {
     update() {
         this.oldPos.x = this.pos.x;
         this.oldPos.y = this.pos.y;
-        if (keys[37] >= 2 && keys[39] <= 1) this.pos.x -= this.speed;
-        if (keys[38] >= 2 && keys[40] <= 1) this.pos.y -= this.speed;
-        if (keys[39] >= 2 && keys[37] <= 1) this.pos.x += this.speed;
-        if (keys[40] >= 2 && keys[38] <= 1) this.pos.y += this.speed;
+        if (keys[68] >= 2 && keys[65] <= 1) this.pos.x += this.speed;
+        if (keys[83] >= 2 && keys[87] <= 1) this.pos.y += this.speed;
+        if (keys[65] >= 2 && keys[68] <= 1) this.pos.x -= this.speed;
+        if (keys[87] >= 2 && keys[83] <= 1) this.pos.y -= this.speed;
+
+
+
     }
 
     draw(xOff, yOff) {

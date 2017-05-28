@@ -2,23 +2,28 @@ class Map {
     constructor(width, height) {
         this.water = { offsetX: 0, offsetY: 0, image: new Image() };
         this.area = new Array(width);
+        this.entities = new Array();
 
-        //        let simplex = new SimplexNoise();
+        this.startX;
+        this.startY;
+        this.endX;
+        this.endY;
+        this.xOff;
+        this.yOff;
+
         noise.seed(Math.random());
-
         let waterMaxHeight = Math.random() * 0.005 + 0.0025;
         let sandMaxHeight = Math.random() * 0.04 + 0.18;
         let grassMaxHeight = Math.random() * 0.2 + 0.75;
         let steps = Math.random() * 0.004 + 0.006;
-
         for (let x = 0; x < width; x++) {
             this.area[x] = new Array(height);
             for (let y = 0; y < this.area[x].length; y++) {
-                //                let value = simplex.noise2D(x * steps, y * steps);
                 let value = noise.perlin2(x * steps, y * steps);
                 if (value < waterMaxHeight) this.area[x][y] = new Tile(x, y, 5);
                 if (value >= waterMaxHeight && value < sandMaxHeight) this.area[x][y] = new Tile(x, y, 2);
                 if (value >= sandMaxHeight && value < grassMaxHeight) this.area[x][y] = new Tile(x, y, 1);
+
                 if (value >= grassMaxHeight) this.area[x][y] = new Tile(x, y, 3);
             }
         }
@@ -45,49 +50,84 @@ class Map {
     update() {
         this.water.offsetX -= 0.5;
         if (this.water.offsetX <= -gwidth) this.water.offsetX += gwidth;
-        for (let x = 0; x < this.area.length; x++) {
-            for (let y = 0; y < this.area[x].length; y++) {
+
+        if (scene.player.pos.x + (scene.player.width * 0.5) < gwidth * 0.5) this.xOff = 0;
+        if (scene.player.pos.x + (scene.player.width * 0.5) >= gwidth * 0.5) this.xOff = scene.player.pos.x + (scene.player.width * 0.5) - gwidth * 0.5;
+        if (scene.player.pos.x + (scene.player.width * 0.5) > this.area.length * 32 - gwidth * 0.5) this.xOff = (this.area.length * 32) - gwidth;
+
+        if (scene.player.pos.y + (scene.player.height * 0.5) < gheight * 0.5) this.yOff = 0;
+        if (scene.player.pos.y + (scene.player.height * 0.5) >= gheight * 0.5) this.yOff = Math.floor(scene.player.pos.y + (scene.player.height * 0.5) - gheight * 0.5);
+        if (scene.player.pos.y + (scene.player.height * 0.5) > this.area[0].length * 32 - gheight * 0.5) this.yOff = (this.area[0].length * 32) - gheight;
+
+        this.startX = Math.floor(this.xOff / 32);
+        this.startY = Math.floor(this.yOff / 32);
+        this.endX = Math.ceil(gwidth / 32) + this.startX + 1;
+        this.endY = Math.ceil(gheight / 32) + this.startY + 1;
+
+        if (this.endX > this.area.length) {
+            this.endX = this.area.length;
+            this.startX = this.endX - Math.ceil(gwidth / 32);
+        }
+
+        if (this.endY > this.area[0].length) {
+            this.endY = this.area[0].length;
+            this.startY = this.endY - Math.ceil(gheight / 32);
+        }
+
+        if (mouse.leftButton === 3) {
+            let x = Math.floor((mouse.x + this.xOff) / 32);
+            let y = Math.floor((mouse.y + this.yOff) / 32);
+            this.area[x][y] = new Tile(x, y, 21);
+        }
+
+        if (mouse.rightButton === 3) {
+            let x = Math.floor((mouse.x + this.xOff) / 32);
+            let y = Math.floor((mouse.y + this.yOff) / 32);
+            this.entities.push(new Tree(x, y, 12 * 6))
+            this.entities.sort(function(a, b) {
+                if (a.pos[1] < b.pos[1]) return -1;
+                if (a.pos[1] == b.pos[1] && a.pos[0] < b.pos[0]) return -1;
+                return 1;
+            })
+        }
+
+
+        for (let x = this.startX; x < this.endX; x++) {
+            for (let y = this.startY; y < this.endY; y++) {
                 this.area[x][y].update();
             }
         }
+
+        for (let a = 0; a < this.entities.length; a++) {
+            this.entities[a].update();
+
+        }
+
     }
 
     draw() {
-
-        let xOff;
-        let yOff;
-
-        if (scene.player.pos.x + (scene.player.width * 0.5) < gwidth * 0.5) xOff = 0;
-        if (scene.player.pos.x + (scene.player.width * 0.5) >= gwidth * 0.5) xOff = scene.player.pos.x + (scene.player.width * 0.5) - gwidth * 0.5;
-        if (scene.player.pos.x + (scene.player.width * 0.5) > this.area.length * 32 - gwidth * 0.5) xOff = (this.area.length * 32) - gwidth;
-
-        if (scene.player.pos.y + (scene.player.height * 0.5) < gheight * 0.5) yOff = 0;
-        if (scene.player.pos.y + (scene.player.height * 0.5) >= gheight * 0.5) yOff = Math.floor(scene.player.pos.y + (scene.player.height * 0.5) - gheight * 0.5);
-        if (scene.player.pos.y + (scene.player.height * 0.5) > this.area[0].length * 32 - gheight * 0.5) yOff = (this.area[0].length * 32) - gheight;
-
-        let startX = Math.floor(xOff / 32);
-        let startY = Math.floor(yOff / 32);
-        let endX = Math.ceil(gwidth / 32) + startX + 1;
-        let endY = Math.ceil(gheight / 32) + startY + 1;
-
-        if (endX > this.area.length) {
-            endX = this.area.length;
-            startX = endX - Math.ceil(gwidth / 32);
-        }
-
-        if (endY > this.area[0].length) {
-            endY = this.area[0].length;
-            startY = endY - Math.ceil(gheight / 32);
-        }
-
         ctx.drawImage(this.water.image, this.water.offsetX, 0);
         ctx.drawImage(this.water.image, gwidth + this.water.offsetX, 0);
-        for (let x = startX; x < endX; x++) {
-            for (let y = startY; y < endY; y++) {
-                this.area[x][y].draw(xOff, yOff);
+        for (let x = this.startX; x < this.endX; x++) {
+            for (let y = this.startY; y < this.endY; y++) {
+                this.area[x][y].draw(this.xOff, this.yOff);
             }
         }
-        scene.player.draw(xOff, yOff);
+
+        let remeberEntEnd;
+
+        for (let a = 0; a < this.entities.length; a++) {
+            if (this.entities[a].pos[1] >= scene.player.pos.y) { remeberEntEnd = a; break };
+            this.entities[a].draw(this.xOff, this.yOff);
+        }
+
+        scene.player.draw(this.xOff, this.yOff);
+
+        for (let a = remeberEntEnd; a < this.entities.length; a++) {
+            this.entities[a].draw(this.xOff, this.yOff);
+        }
+
+
     }
 
 }

@@ -60,8 +60,8 @@ class Title {
 
                         // quit
                         if (i == 3) {
-                            //                            let window = remote.getCurrentWindow();
-                            //                            window.close();
+                            // let window = remote.getCurrentWindow();
+                            // window.close();
                         }
                     }
                 }
