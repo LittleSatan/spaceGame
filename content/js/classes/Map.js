@@ -100,7 +100,6 @@ class Map {
 
         for (let a = 0; a < this.entities.length; a++) {
             this.entities[a].update();
-
         }
 
     }

@@ -4,6 +4,7 @@ class Tree {
         this.tileID = [tileID % 6, Math.floor(tileID / 6)];
         this.tileSize = 32;
         this.pos = [x * this.tileSize, y * this.tileSize, 96, 128];
+        this.collision = new Collision(this.pos[0], this.pos[1] + 10, this.tileSize, 2)
     }
 
     update() {
