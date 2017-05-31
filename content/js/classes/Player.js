@@ -1,9 +1,11 @@
 class Player {
-    constructor() {
-        this.pos = { x: 0, y: 0 };
-        this.oldPos = { x: 0, y: 0 };
+    constructor(xPos, yPos) {
+        this.pos = { x: xPos || 0, y: yPos || 0 };
+        this.oldPos = { x: xPos || 0, y: yPos || 0 };
         this.width = 30;
         this.height = 30;
+        this.middle = { x: this.pos.x + this.width * 0.5, y: this.pos.y + this.height * 0.5 }
+        this.diameterSQR = this.width * this.width + this.height * this.height;
         this.speed = 3;
         this.velocity = [0, 0]
     }
@@ -25,6 +27,8 @@ class Player {
 
         this.pos.x += this.velocity[0];
         this.pos.y += this.velocity[1];
+        this.middle = { x: this.pos.x + this.width * 0.5, y: this.pos.y + this.height * 0.5 }
+
     }
 
     draw(xOff, yOff) {

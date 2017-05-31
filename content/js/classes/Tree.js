@@ -12,7 +12,8 @@ class Tree {
     }
 
     draw(xOff, yOff) {
-        ctx.drawImage(scene.tiles, this.tileID[0] * this.tileSize, this.tileID[1] * this.tileSize, this.pos[2], this.pos[3], this.pos[0] - 32 - xOff, this.pos[1] - 96 - yOff, this.pos[2], this.pos[3]);
+        if (this.pos[0] >= xOff - this.pos[2] && this.pos[0] <= xOff + gwidth + this.pos[2] && this.pos[1] >= yOff - this.pos[3] && this.pos[1] <= yOff + gheight + this.pos[3])
+            ctx.drawImage(scene.tiles, this.tileID[0] * this.tileSize, this.tileID[1] * this.tileSize, this.pos[2], this.pos[3], this.pos[0] - 32 - xOff, this.pos[1] - 96 - yOff, this.pos[2], this.pos[3]);
     }
 
 }
