@@ -1,7 +1,7 @@
 // const remote = require('electron').remote;
 
 let fps = 60,
-    tileSize = 40,
+    tileSize = 32,
     gwidth = 1280,
     gheight = 720,
     scene,

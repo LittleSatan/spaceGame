@@ -1,9 +1,13 @@
 class Tile {
-    constructor(x, y, tileID) {
+    constructor(x, y, tileID, collision) {
         this.tileNmbr = tileID;
         this.tileID = [tileID % 6, Math.floor(tileID / 6)];
-        this.tileSize = 32;
-        this.pos = [x * this.tileSize, y * this.tileSize];
+        this.pos = [x * tileSize, y * tileSize];
+        if (collision) {
+            this.collision = new Collision(this.pos[0], this.pos[1], tileSize, tileSize);
+        } else {
+            this.collision = undefined;
+        }
     }
 
     update() {
@@ -11,7 +15,7 @@ class Tile {
     }
 
     draw(xOff, yOff) {
-        ctx.drawImage(scene.tiles, this.tileID[0] * this.tileSize, this.tileID[1] * this.tileSize, this.tileSize, this.tileSize, this.pos[0] - xOff, this.pos[1] - yOff, this.tileSize, this.tileSize);
+        ctx.drawImage(scene.tiles, this.tileID[0] * tileSize, this.tileID[1] * tileSize, tileSize, tileSize, this.pos[0] - xOff, this.pos[1] - yOff, tileSize, tileSize);
     }
 
 }

@@ -24,6 +24,18 @@ class Player {
             scene.map.entities[a].collision.checkCollsion();
         }
 
+        let checkColX = Math.floor(scene.player.pos.x / tileSize);
+        let checkColY = Math.floor(scene.player.pos.y / tileSize);
+        if (checkColX < 0) checkColX = 0;
+        if (checkColY < 0) checkColY = 0;
+        if (checkColX > scene.map.area.lenght - 3) checkColX = scene.map.area.lenght - 3;
+        if (checkColY > scene.map.area[checkColX].lenght - 3) checkColY = scene.map.area[checkColX].lenght - 3;
+
+        for (let x = checkColX; x < checkColX + 3; x++) {
+            for (let y = checkColY; y < checkColY + 3; y++) {
+                if (scene.map.area[x][y].collision) scene.map.area[x][y].collision.checkCollsion();
+            }
+        }
 
         this.pos.x += this.velocity[0];
         this.pos.y += this.velocity[1];

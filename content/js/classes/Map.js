@@ -3,6 +3,7 @@ class Map {
         this.water = { offsetX: 0, offsetY: 0, image: new Image() };
         this.area = new Array(width);
         this.entities = new Array();
+        this.tileSize = 32;
 
         this.startX;
         this.startY;
@@ -20,7 +21,7 @@ class Map {
             this.area[x] = new Array(height);
             for (let y = 0; y < this.area[x].length; y++) {
                 let value = noise.perlin2(x * steps, y * steps);
-                if (value < waterMaxHeight) this.area[x][y] = new Tile(x, y, 5);
+                if (value < waterMaxHeight) this.area[x][y] = new Tile(x, y, 5, true);
                 if (value >= waterMaxHeight && value < sandMaxHeight) this.area[x][y] = new Tile(x, y, 2);
                 if (value >= sandMaxHeight && value < grassMaxHeight) this.area[x][y] = new Tile(x, y, 1);
                 if (value >= sandMaxHeight && value < grassMaxHeight && Math.random() >= 0.96) {
@@ -46,7 +47,6 @@ class Map {
         while (true) {
             let x = Math.floor(Math.random() * this.area.length);
             let y = Math.floor(Math.random() * this.area[x].length);
-            console.log(x, y)
             if (this.area[x][y].tileNmbr == 1) {
                 scene.player = new Player(x * 32, y * 32);
                 break;
