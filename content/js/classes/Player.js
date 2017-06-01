@@ -24,8 +24,8 @@ class Player {
             scene.map.entities[a].collision.checkCollsion();
         }
 
-        let checkColX = Math.floor(scene.player.pos.x / tileSize);
-        let checkColY = Math.floor(scene.player.pos.y / tileSize);
+        let checkColX = Math.floor(scene.player.pos.x / tileSize) - 1;
+        let checkColY = Math.floor(scene.player.pos.y / tileSize) - 1;
         if (checkColX < 0) checkColX = 0;
         if (checkColY < 0) checkColY = 0;
         if (checkColX > scene.map.area.lenght - 3) checkColX = scene.map.area.lenght - 3;
