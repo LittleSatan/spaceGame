@@ -60,8 +60,14 @@ class Collision {
                     }
                 }
             }
+
+            if (!(((scene.player.pos.y + scene.player.height + scene.player.velocity[1]) <= (this.pos[1])) ||
+                    (scene.player.pos.y + scene.player.velocity[1] >= (this.pos[1] + this.pos[3])) ||
+                    ((scene.player.pos.x + scene.player.width + scene.player.velocity[0]) <= this.pos[0]) ||
+                    (scene.player.pos.x + scene.player.velocity[0] >= (this.pos[0] + this.pos[2])))) {
+                scene.player.velocity = [0, 0];
+                return;
+            }
         }
-
     }
-
 }

@@ -70,7 +70,6 @@ window.onload = function() {
 };
 
 function loop() {
-    console.log("wheel: " + mouse.wheel)
     if (state === 1) {
         scene.update();
         scene.draw();
