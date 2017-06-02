@@ -9,11 +9,11 @@ class Hud {
 
         // drawh health
         ctx.fillStyle = "#F33"
-        ctx.fillRect(10, 70, scene.player.health[0], 20);
+        ctx.fillRect(10, 70, scene.player.health[0] * 2, 20);
         ctx.beginPath();
         ctx.lineWidth = "2";
         ctx.strokeStyle = "black";
-        ctx.rect(10, 70, scene.player.health[1], 20);
+        ctx.rect(10, 70, scene.player.health[1] * 2, 20);
         ctx.stroke();
 
 

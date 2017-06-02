@@ -7,7 +7,7 @@ let fps = 60,
     scene,
     c, ctx,
     state = "init",
-    mouse = { x: 0, y: 0, oldX: 0, oldY: 0, leftButton: 0, rightButton: 0 },
+    mouse = { x: 0, y: 0, oldX: 0, oldY: 0, leftButton: 0, rightButton: 0, wheel: 0 },
     keys;
 
 window.onload = function() {
@@ -27,7 +27,7 @@ window.onload = function() {
         keys[i] = 0;
     }
 
-    c.addEventListener('mousemove', function(evt) {
+    document.addEventListener('mousemove', function(evt) {
         function getMousePos(canvas, evt) {
             let rect = canvas.getBoundingClientRect();
             return {
@@ -39,6 +39,8 @@ window.onload = function() {
         mouse.x = mouseTemp.x;
         mouse.y = mouseTemp.y;
     }, false);
+
+    document.addEventListener("mousewheel", MouseWheelHandler, false);
 
     document.onmousedown = function(evt) {
         mouseDown(evt);
@@ -68,6 +70,7 @@ window.onload = function() {
 };
 
 function loop() {
+    console.log("wheel: " + mouse.wheel)
     if (state === 1) {
         scene.update();
         scene.draw();
@@ -76,8 +79,6 @@ function loop() {
             scene.loading();
         }
     }
-    mouse.oldX = mouse.x;
-    mouse.oldY = mouse.y;
     clearPressedKeys();
     window.requestAnimationFrame(loop)
 }
@@ -119,7 +120,15 @@ function mouseUp(e) {
         if (mouse.rightButton >= 2) mouse.rightButton = 1;
 }
 
+function MouseWheelHandler(e) {
+    var e = window.event;
+    mouse.wheel += Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+}
+
 function clearPressedKeys() {
+    mouse.oldX = mouse.x;
+    mouse.oldY = mouse.y;
+    mouse.wheel = 0;
     for (let i = 0; i < 222; i++) {
         if (keys[i] == 3) keys[i] = 2;
         if (keys[i] == 1) keys[i] = 0;
