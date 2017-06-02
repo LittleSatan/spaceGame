@@ -94,7 +94,7 @@ class Map {
         if (mouse.leftButton === 3) {
             let x = Math.floor((mouse.x + this.xOff) / 32);
             let y = Math.floor((mouse.y + this.yOff) / 32);
-            this.area[x][y] = new Tile(x, y, 21);
+            this.area[x][y] = new Tile(x, y, 21, true);
         }
 
         if (mouse.rightButton === 3) {
@@ -107,7 +107,6 @@ class Map {
                 return 1;
             })
         }
-
 
         for (let x = this.startX; x < this.endX; x++) {
             for (let y = this.startY; y < this.endY; y++) {

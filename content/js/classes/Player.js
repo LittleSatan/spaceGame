@@ -23,7 +23,7 @@ class Player {
             this.stamina--;
         }
         if (keys[16] <= 1) {
-            this.stamina++;
+            this.stamina += 0.7;
             this.running = false;
         }
         if (this.stamina < 0) {
