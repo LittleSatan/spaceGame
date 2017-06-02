@@ -6,8 +6,9 @@ class Player {
         this.height = 30;
         this.middle = { x: this.pos.x + this.width * 0.5, y: this.pos.y + this.height * 0.5 }
         this.diameterSQR = this.width * this.width + this.height * this.height;
-        this.speed = 3;
+        this.speed = [3, 3, 7]; // 0 = current speed, 1 = normal speed, 2 = running speed
         this.running = false;
+        this.exhausted = false;
         this.stamina = 300;
         this.velocity = [0, 0]
     }
@@ -18,26 +19,28 @@ class Player {
         this.velocity = [0, 0];
 
         // running thingy
-        if (keys[16] == 3 && this.stamina > 0) this.running = true;
-        if (keys[16] >= 2) {
+        if (keys[16] == 3 && (this.stamina > 50 || !this.exhausted)) this.running = true;
+        if (keys[16] >= 2 && this.running) {
             this.stamina--;
         }
-        if (keys[16] <= 1) {
-            this.stamina += 0.7;
+        if (keys[16] <= 1 || !this.running) {
+            this.stamina += 0.4;
             this.running = false;
         }
         if (this.stamina < 0) {
+            this.exhausted = true;
             this.stamina = 0;
             this.running = false;
         }
+        if (this.stamina > 50) this.exhausted = false;
         if (this.stamina > 300) this.stamina = 300;
-        if (this.running) { this.speed = 6 } else this.speed = 3;
+        if (this.running) { this.speed[0] = this.speed[2] } else this.speed[0] = this.speed[1];
 
         // walk thingy
-        if (keys[68] >= 2 && keys[65] <= 1) this.velocity[0] = this.speed;
-        if (keys[83] >= 2 && keys[87] <= 1) this.velocity[1] = this.speed;
-        if (keys[65] >= 2 && keys[68] <= 1) this.velocity[0] = -this.speed;
-        if (keys[87] >= 2 && keys[83] <= 1) this.velocity[1] = -this.speed;
+        if (keys[68] >= 2 && keys[65] <= 1) this.velocity[0] = this.speed[0];
+        if (keys[83] >= 2 && keys[87] <= 1) this.velocity[1] = this.speed[0];
+        if (keys[65] >= 2 && keys[68] <= 1) this.velocity[0] = -this.speed[0];
+        if (keys[87] >= 2 && keys[83] <= 1) this.velocity[1] = -this.speed[0];
 
         // check col
         for (let a = 0; a < scene.map.entities.length; a++) {
