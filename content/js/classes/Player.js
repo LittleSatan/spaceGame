@@ -24,7 +24,7 @@ class Player {
         if (keys[16] >= 2 && this.running) {
             this.stamina[0]--;
         }
-        if (keys[16] <= 1 || !this.running) {
+        if (keys[16] <= 1 || !this.running || (keys[65] <= 1 && keys[68] <= 1 && keys[83] <= 1 && keys[87] <= 1)) {
             this.stamina[0] += 0.4;
             this.running = false;
         }
