@@ -8,8 +8,7 @@ class Collision {
 
     checkCollsion() {
 
-        if ((this.middle.x - scene.player.middle.x * this.middle.x - scene.player.middle.x) + (this.middle.y - scene.player.middle.y * this.middle.y - scene.player.middle.y) <= this.diameterSQR + scene.player.diameterSQR + scene.player.speed) {
-
+        if ((this.middle.x - scene.player.middle.x * this.middle.x - scene.player.middle.x) + (this.middle.y - scene.player.middle.y * this.middle.y - scene.player.middle.y) <= this.diameterSQR + scene.player.diameterSQR + scene.player.speed[0]) {
             // if scene.player above block horizontally
             if (scene.player.pos.x + scene.player.width > this.pos[0] &&
                 scene.player.pos.x < this.pos[0] + this.pos[2]) {
