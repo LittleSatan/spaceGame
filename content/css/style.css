@@ -6,7 +6,7 @@ body {
     height: 100%;
     overflow: hidden;
     background-color: #000;
-    cursor: none;
+    cursor: url("../img/other/cursor.png"), default;
 }
 
 canvas {

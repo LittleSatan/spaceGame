@@ -109,20 +109,9 @@ class Title {
             ctx.quadraticCurveTo(this.menu[i].x, this.menu[i].y, this.menu[i].x + r, this.menu[i].y);
             ctx.closePath();
             ctx.fill();
-
             ctx.globalAlpha = 1;
             ctx.fillStyle = "#000";
             ctx.fillText(this.menu[i].text, this.menu[i].x + this.menu[i].width * 0.5, this.menu[i].y + 40);
-        }
-        if (mouse.leftButton === 3) ctx.fillStyle = "#F00";
-        if (mouse.leftButton === 2) ctx.fillStyle = "#00F";
-        if (mouse.leftButton === 1) ctx.fillStyle = "#0F0";
-        if (mouse.leftButton === 0) ctx.fillStyle = "#FFF";
-        ctx.fillRect(mouse.x - 2, mouse.y - 2, 4, 4)
-        if (this.fadeOut > 1) {
-            ctx.fillStyle = "#FFF"
-            ctx.globalAlpha = this.fadeOut / 15;
-            ctx.fillRect(0, 0, gwidth, gheight);
         }
     }
 }

@@ -10,7 +10,7 @@ class Player {
         this.running = false;
         this.exhausted = false;
         this.health = [100, 100]; // 0 = current health, 1 = max health
-        this.stamina = [200, 200]; // 0 = current stamina, 1 = max stamina
+        this.stamina = [200, 200, 200]; // 0 = current stamina, 1 = max stamina, 2 current max stamina
         this.velocity = [0, 0]
     }
 

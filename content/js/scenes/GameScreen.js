@@ -38,11 +38,6 @@ class GameScreen {
         this.map.draw();
         this.player.draw();
         this.hud.draw();
-        if (mouse.leftButton === 3) ctx.fillStyle = "#F00";
-        if (mouse.leftButton === 2) ctx.fillStyle = "#00F";
-        if (mouse.leftButton === 1) ctx.fillStyle = "#0F0";
-        if (mouse.leftButton === 0) ctx.fillStyle = "#FFF";
-        ctx.fillRect(mouse.x - 2, mouse.y - 2, 4, 4)
     }
 
 }
