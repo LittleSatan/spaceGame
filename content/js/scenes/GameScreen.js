@@ -15,6 +15,11 @@ class GameScreen {
 
         }
         this.tiles.src = "img/tileset/texture1.png";
+        this.itemsSprite = new Image();
+        this.itemsSprite.onload = function() {
+            state += 0.1;
+        }
+        this.itemsSprite.src = "img/items.png";
 
     }
 

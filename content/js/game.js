@@ -28,16 +28,8 @@ window.onload = function() {
     }
 
     document.addEventListener('mousemove', function(evt) {
-        function getMousePos(canvas, evt) {
-            let rect = canvas.getBoundingClientRect();
-            return {
-                x: evt.clientX - rect.left,
-                y: evt.clientY - rect.top
-            };
-        }
-        let mouseTemp = getMousePos(c, evt);
-        mouse.x = mouseTemp.x;
-        mouse.y = mouseTemp.y;
+        mouse.x = evt.clientX;
+        mouse.y = evt.clientY;
     }, false);
 
     document.addEventListener("mousewheel", MouseWheelHandler, false);

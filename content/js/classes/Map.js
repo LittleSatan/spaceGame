@@ -52,7 +52,7 @@ class Map {
                 break;
             }
         };
-        state += 0.5;
+        state += 0.4;
     }
 
     resize() {

@@ -7,33 +7,41 @@ class Hud {
 
     draw() {
 
+        scene.player.inventory.drawHUD();
+
         // drawh health
         ctx.fillStyle = "#F33"
-        ctx.fillRect(10, 70, scene.player.health[0] * 2, 20);
+        ctx.fillRect(10, 60, scene.player.health[0] * 2, 20);
         ctx.beginPath();
         ctx.lineWidth = "2";
         ctx.strokeStyle = "black";
-        ctx.rect(10, 70, scene.player.health[1] * 2, 20);
+        ctx.rect(10, 60, scene.player.health[1] * 2, 20);
         ctx.stroke();
         ctx.textAlign = 'center';
         ctx.font = "16px Verdana";
-        ctx.fillStyle = "#000";
-        ctx.fillText(scene.player.health[0] + "/" + scene.player.health[1], 10 + scene.player.health[1], 86);
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 2;
+        ctx.strokeText(scene.player.health[0] + "/" + scene.player.health[1], 10 + scene.player.health[1], 76);
+        ctx.fillStyle = "#FFF";
+        ctx.fillText(scene.player.health[0] + "/" + scene.player.health[1], 10 + scene.player.health[1], 76);
 
         // draw stamina
         if (scene.player.exhausted) {
-            ctx.fillStyle = "#080"
+            ctx.fillStyle = "#050"
         } else {
-            ctx.fillStyle = "#4F4"
+            ctx.fillStyle = "#191"
         }
-        ctx.fillRect(10, 110, scene.player.stamina[0] * 0.7, 20);
+        ctx.fillRect(10, 90, scene.player.stamina[0] * 0.7, 20);
         ctx.beginPath();
         ctx.lineWidth = "2";
         ctx.strokeStyle = "black";
-        ctx.rect(10, 110, scene.player.stamina[1] * 0.7, 20);
+        ctx.rect(10, 90, scene.player.stamina[1] * 0.7, 20);
         ctx.stroke();
-        ctx.fillStyle = "#000";
-        ctx.fillText(Math.round(scene.player.stamina[0]) + "/" + scene.player.stamina[1], 10 + scene.player.stamina[1] * 0.35, 126);
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 2;
+        ctx.strokeText(Math.round(scene.player.stamina[0]) + "/" + scene.player.stamina[1], 10 + scene.player.stamina[1] * 0.35, 106);
+        ctx.fillStyle = "#FFF";
+        ctx.fillText(Math.round(scene.player.stamina[0]) + "/" + scene.player.stamina[1], 10 + scene.player.stamina[1] * 0.35, 106);
     }
 
 }
