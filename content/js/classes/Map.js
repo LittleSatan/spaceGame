@@ -24,7 +24,7 @@ class Map {
                 if (value < waterMaxHeight) this.area[x][y] = new Tile(x, y, 5, true);
                 if (value >= waterMaxHeight && value < sandMaxHeight) this.area[x][y] = new Tile(x, y, 2);
                 if (value >= sandMaxHeight && value < grassMaxHeight) this.area[x][y] = new Tile(x, y, 1);
-                if (value >= sandMaxHeight && value < grassMaxHeight && Math.random() >= 0.99) {
+                if (value >= sandMaxHeight && value < grassMaxHeight && Math.random() >= 0.98) {
                     this.entities.push(new Tree(x, y, 12 * 6))
                     this.entities.sort(function(a, b) {
                         if (a.pos[1] < b.pos[1]) return -1;
@@ -39,7 +39,7 @@ class Map {
 
         for (let x = 0; x < this.area.length; x++) {
             for (let y = 0; y < this.area[x].length; y++) {
-                ctx.drawImage(scene.tiles, 128, 0, tileSize, tileSize, x * tileSize, y * tileSize, tileSize, tileSize);
+                ctx.drawImage(scene.tiles, 256, 0, tileSize, tileSize, x * tileSize, y * tileSize, tileSize, tileSize);
             }
         }
         this.water.image.src = c.toDataURL();
@@ -52,7 +52,7 @@ class Map {
                 break;
             }
         };
-        state += 0.4;
+        state += 0.3;
     }
 
     resize() {

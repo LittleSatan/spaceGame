@@ -13,8 +13,8 @@ class Inventory {
     }
 
     modifyItem(itemid, amount) {
-        for (let i = 0; i < this.items.length; i++) {
-            for (let j = 0; j < this.items[i].length; j++) {
+        for (let j = 0; j < this.items[0].length; j++) {
+            for (let i = 0; i < this.items.length; i++) {
                 if (this.items[i][j] && this.items[i][j].id == itemid) {
                     this.items[i][j].amount += amount;
                     if (this.items[i][j].amount <= 0) this.items[i][j] = undefined;
@@ -23,8 +23,8 @@ class Inventory {
             }
         }
         if (amount > 0) {
-            for (let i = 0; i < this.items.length; i++) {
-                for (let j = 0; j < this.items[i].length; j++) {
+            for (let j = 0; j < this.items[0].length; j++) {
+                for (let i = 0; i < this.items.length; i++) {
                     if (!this.items[i][j]) {
                         this.items[i][j] = new Item(itemid, amount);
                         return;
@@ -37,19 +37,14 @@ class Inventory {
     drawHUD() {
         for (let i = 0; i < this.items.length; i++) {
 
-            ctx.fillStyle = "#000"
-            ctx.globalAlpha = 0.4;
-            ctx.fillRect(i * 50 + 10, 10, 40, 40);
-            ctx.globalAlpha = 1;
-            if (this.items[i][0]) {
-                this.items[i][0].draw(i * 50 + 10, 10);
+            if (this.selection == i) {
+                ctx.drawImage(scene.hud.interface, 54, 36, 50, 50, i * 55 + 10, 10, 50, 50)
+            } else {
+                ctx.drawImage(scene.hud.interface, 0, 36, 50, 50, i * 55 + 10, 10, 50, 50)
             }
-            ctx.beginPath();
-            ctx.lineWidth = "2";
-            ctx.strokeStyle = "black";
-            if (this.selection == i) ctx.strokeStyle = "yellow";
-            ctx.rect(i * 50 + 10, 10, 40, 40);
-            ctx.stroke();
+            if (this.items[i][0]) {
+                this.items[i][0].draw(i * 55 + 15, 15);
+            }
         }
     }
 

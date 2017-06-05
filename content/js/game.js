@@ -8,9 +8,17 @@ let fps = 60,
     c, ctx,
     state = "init",
     mouse = { x: 0, y: 0, oldX: 0, oldY: 0, leftButton: 0, rightButton: 0, wheel: 0 },
-    keys;
+    keys,
+    settings = new Settings(),
+    electron,
+    remote;
 
 window.onload = function() {
+    if ((navigator.userAgent).includes("Electron")) {
+        electron = true;
+        remote = require('electron').remote;
+        console.log("running in electron");
+    }
     fps = 1000 / fps;
     keys = new Array(222);
 

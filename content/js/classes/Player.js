@@ -45,11 +45,11 @@ class Player {
         }
 
         // running thingy
-        if (keys[16] == 3 && (this.stamina[0] > 50 || !this.exhausted)) this.running = true;
-        if (keys[16] >= 2 && this.running) {
+        if (keys[settings.keys.running] == 3 && (this.stamina[0] > 50 || !this.exhausted)) this.running = true;
+        if (keys[settings.keys.running] >= 2 && this.running) {
             this.stamina[0]--;
         }
-        if (keys[16] <= 1 || !this.running || (keys[65] <= 1 && keys[68] <= 1 && keys[83] <= 1 && keys[87] <= 1)) {
+        if (keys[settings.keys.running] <= 1 || !this.running || (keys[settings.keys.left] <= 1 && keys[settings.keys.right] <= 1 && keys[settings.keys.down] <= 1 && keys[settings.keys.up] <= 1)) {
             this.stamina[0] += 0.4;
             this.running = false;
         }
@@ -63,10 +63,10 @@ class Player {
         if (this.running) { this.speed[0] = this.speed[2] } else this.speed[0] = this.speed[1];
 
         // walk thingy
-        if (keys[68] >= 2 && keys[65] <= 1) this.velocity[0] = this.speed[0];
-        if (keys[83] >= 2 && keys[87] <= 1) this.velocity[1] = this.speed[0];
-        if (keys[65] >= 2 && keys[68] <= 1) this.velocity[0] = -this.speed[0];
-        if (keys[87] >= 2 && keys[83] <= 1) this.velocity[1] = -this.speed[0];
+        if (keys[settings.keys.right] >= 2 && keys[settings.keys.left] <= 1) this.velocity[0] = this.speed[0];
+        if (keys[settings.keys.down] >= 2 && keys[settings.keys.up] <= 1) this.velocity[1] = this.speed[0];
+        if (keys[settings.keys.left] >= 2 && keys[settings.keys.right] <= 1) this.velocity[0] = -this.speed[0];
+        if (keys[settings.keys.up] >= 2 && keys[settings.keys.down] <= 1) this.velocity[1] = -this.speed[0];
 
         // check col
         for (let a = 0; a < scene.map.entities.length; a++) {

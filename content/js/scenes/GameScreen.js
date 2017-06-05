@@ -10,8 +10,8 @@ class GameScreen {
         this.hud = new Hud();
         this.tiles.onload = function() {
 
-            state += 0.5;
             scene.map = new Map(500, 500);
+            state += 0.5;
 
         }
         this.tiles.src = "img/tileset/texture1.png";
