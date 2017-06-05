@@ -39,7 +39,7 @@ class Map {
 
         for (let x = 0; x < this.area.length; x++) {
             for (let y = 0; y < this.area[x].length; y++) {
-                ctx.drawImage(scene.tiles, 128, 0, 32, 32, x * 32, y * 32, 32, 32);
+                ctx.drawImage(scene.tiles, 128, 0, tileSize, tileSize, x * tileSize, y * tileSize, tileSize, tileSize);
             }
         }
         this.water.image.src = c.toDataURL();
@@ -48,7 +48,7 @@ class Map {
             let x = Math.floor(Math.random() * this.area.length);
             let y = Math.floor(Math.random() * this.area[x].length);
             if (this.area[x][y].tileNmbr == 1) {
-                scene.player = new Player(x * 32, y * 32);
+                scene.player = new Player(x * tileSize, y * tileSize);
                 break;
             }
         };
@@ -58,7 +58,7 @@ class Map {
     resize() {
         for (let x = 0; x < this.area.length; x++) {
             for (let y = 0; y < this.area[x].length; y++) {
-                ctx.drawImage(scene.tiles, 128, 0, 32, 32, x * 32, y * 32, 32, 32);
+                ctx.drawImage(scene.tiles, 256, 0, tileSize, tileSize, x * tileSize, y * tileSize, tileSize, tileSize);
             }
         }
         this.water.image.src = c.toDataURL();
@@ -70,36 +70,36 @@ class Map {
 
         if (scene.player.pos.x + (scene.player.width * 0.5) < gwidth * 0.5) this.xOff = 0;
         if (scene.player.pos.x + (scene.player.width * 0.5) >= gwidth * 0.5) this.xOff = scene.player.pos.x + (scene.player.width * 0.5) - gwidth * 0.5;
-        if (scene.player.pos.x + (scene.player.width * 0.5) > this.area.length * 32 - gwidth * 0.5) this.xOff = (this.area.length * 32) - gwidth;
+        if (scene.player.pos.x + (scene.player.width * 0.5) > this.area.length * tileSize - gwidth * 0.5) this.xOff = (this.area.length * tileSize) - gwidth;
 
         if (scene.player.pos.y + (scene.player.height * 0.5) < gheight * 0.5) this.yOff = 0;
         if (scene.player.pos.y + (scene.player.height * 0.5) >= gheight * 0.5) this.yOff = Math.floor(scene.player.pos.y + (scene.player.height * 0.5) - gheight * 0.5);
-        if (scene.player.pos.y + (scene.player.height * 0.5) > this.area[0].length * 32 - gheight * 0.5) this.yOff = (this.area[0].length * 32) - gheight;
+        if (scene.player.pos.y + (scene.player.height * 0.5) > this.area[0].length * tileSize - gheight * 0.5) this.yOff = (this.area[0].length * tileSize) - gheight;
 
-        this.startX = Math.floor(this.xOff / 32);
-        this.startY = Math.floor(this.yOff / 32);
-        this.endX = Math.ceil(gwidth / 32) + this.startX + 1;
-        this.endY = Math.ceil(gheight / 32) + this.startY + 1;
+        this.startX = Math.floor(this.xOff / tileSize);
+        this.startY = Math.floor(this.yOff / tileSize);
+        this.endX = Math.ceil(gwidth / tileSize) + this.startX + 1;
+        this.endY = Math.ceil(gheight / tileSize) + this.startY + 1;
 
         if (this.endX > this.area.length) {
             this.endX = this.area.length;
-            this.startX = this.endX - Math.ceil(gwidth / 32);
+            this.startX = this.endX - Math.ceil(gwidth / tileSize);
         }
 
         if (this.endY > this.area[0].length) {
             this.endY = this.area[0].length;
-            this.startY = this.endY - Math.ceil(gheight / 32);
+            this.startY = this.endY - Math.ceil(gheight / tileSize);
         }
 
         if (mouse.leftButton === 3) {
-            let x = Math.floor((mouse.x + this.xOff) / 32);
-            let y = Math.floor((mouse.y + this.yOff) / 32);
+            let x = Math.floor((mouse.x + this.xOff) / tileSize);
+            let y = Math.floor((mouse.y + this.yOff) / tileSize);
             this.area[x][y] = new Tile(x, y, 21, true);
         }
 
         if (mouse.rightButton === 3) {
-            let x = Math.floor((mouse.x + this.xOff) / 32);
-            let y = Math.floor((mouse.y + this.yOff) / 32);
+            let x = Math.floor((mouse.x + this.xOff) / tileSize);
+            let y = Math.floor((mouse.y + this.yOff) / tileSize);
             this.entities.push(new Tree(x, y, 12 * 6))
             this.entities.sort(function(a, b) {
                 if (a.pos[1] < b.pos[1]) return -1;

@@ -31,7 +31,7 @@ class Player {
         if (mouse.wheel <= -1) {
             this.inventory.selection--;
             if (this.inventory.selection < 0) {
-                this.inventory.selection = this.inventory.items.length;
+                this.inventory.selection = this.inventory.items.length - 1;
             }
 
         }

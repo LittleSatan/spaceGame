@@ -1,7 +1,7 @@
 // const remote = require('electron').remote;
 
 let fps = 60,
-    tileSize = 32,
+    tileSize = 64,
     gwidth = 1280,
     gheight = 720,
     scene,
@@ -75,7 +75,6 @@ function loop() {
 }
 
 function resize() {
-    let c = document.getElementById("gameCanvas");
     gwidth = window.innerWidth;
     gheight = window.innerHeight;
     c.style.height = gwidth;

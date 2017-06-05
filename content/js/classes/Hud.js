@@ -10,6 +10,10 @@ class Hud {
         scene.player.inventory.drawHUD();
 
         // drawh health
+        ctx.globalAlpha = 0.2;
+        ctx.fillStyle = "#000"
+        ctx.fillRect(10, 60, scene.player.health[1] * 2, 20);
+        ctx.globalAlpha = 1;
         ctx.fillStyle = "#F33"
         ctx.fillRect(10, 60, scene.player.health[0] * 2, 20);
         ctx.beginPath();
@@ -26,6 +30,10 @@ class Hud {
         ctx.fillText(scene.player.health[0] + "/" + scene.player.health[1], 10 + scene.player.health[1], 76);
 
         // draw stamina
+        ctx.globalAlpha = 0.2;
+        ctx.fillStyle = "#000"
+        ctx.fillRect(10, 90, scene.player.stamina[1] * 0.7, 20);
+        ctx.globalAlpha = 1;
         if (scene.player.exhausted) {
             ctx.fillStyle = "#050"
         } else {

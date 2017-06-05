@@ -12,6 +12,28 @@ class Inventory {
 
     }
 
+    modifyItem(itemid, amount) {
+        for (let i = 0; i < this.items.length; i++) {
+            for (let j = 0; j < this.items[i].length; j++) {
+                if (this.items[i][j] && this.items[i][j].id == itemid) {
+                    this.items[i][j].amount += amount;
+                    if (this.items[i][j].amount <= 0) this.items[i][j] = undefined;
+                    return;
+                }
+            }
+        }
+        if (amount > 0) {
+            for (let i = 0; i < this.items.length; i++) {
+                for (let j = 0; j < this.items[i].length; j++) {
+                    if (!this.items[i][j]) {
+                        this.items[i][j] = new Item(itemid, amount);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
     drawHUD() {
         for (let i = 0; i < this.items.length; i++) {
 
