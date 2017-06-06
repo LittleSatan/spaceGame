@@ -7,7 +7,7 @@ let fps = 60,
     scene,
     c, ctx,
     state = "init",
-    mouse = { x: 0, y: 0, oldX: 0, oldY: 0, leftButton: 0, rightButton: 0, wheel: 0 },
+    mouse = { x: 0, y: 0, leftButton: 0, rightButton: 0, wheel: 0 },
     keys,
     settings = new Settings(),
     electron,
@@ -17,7 +17,6 @@ window.onload = function() {
     if ((navigator.userAgent).includes("Electron")) {
         electron = true;
         remote = require('electron').remote;
-        console.log("running in electron");
     }
     fps = 1000 / fps;
     keys = new Array(222);
@@ -35,10 +34,7 @@ window.onload = function() {
         keys[i] = 0;
     }
 
-    document.addEventListener('mousemove', function(evt) {
-        mouse.x = evt.clientX;
-        mouse.y = evt.clientY;
-    }, false);
+    document.addEventListener('mousemove', mouseMove, false);
 
     document.addEventListener("mousewheel", MouseWheelHandler, false);
 
@@ -104,6 +100,11 @@ function keyUp(e) {
     if (keys[e] >= 2) keys[e] = 1;
 }
 
+function mouseMove(e) {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+}
+
 function mouseDown(e) {
     if (e.button == 0)
         if (mouse.leftButton <= 1) mouse.leftButton = 3;
@@ -124,8 +125,6 @@ function MouseWheelHandler(e) {
 }
 
 function clearPressedKeys() {
-    mouse.oldX = mouse.x;
-    mouse.oldY = mouse.y;
     mouse.wheel = 0;
     for (let i = 0; i < 222; i++) {
         if (keys[i] == 3) keys[i] = 2;

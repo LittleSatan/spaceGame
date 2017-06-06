@@ -13,6 +13,13 @@ class Hud {
 
     }
 
+    drawText(x, y, text) {
+        let letterArray = text.split("");
+        for (let i = 0; i < letterArray.length; i++) {
+
+        }
+    }
+
     draw() {
 
         scene.player.inventory.drawHUD();
