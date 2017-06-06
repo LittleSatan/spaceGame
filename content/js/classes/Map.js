@@ -93,10 +93,19 @@ class Map {
 
         let resetCursor = true;
         for (let a = 0; a < scene.map.entities.length; a++) {
-            if (this.entities[a].mouseCollision()) {
+            let b = this.entities[a].mouseCollision();
+
+            if (b == "clicked") {
+                this.entities.splice(a, 1);
+                scene.player.inventory.modifyItem(0, 5);
+                break;
+            };
+
+            if (b == "hover") {
                 resetCursor = false;
                 break;
             };
+
         }
         if (resetCursor) c.style.cursor = 'url("./img/other/cursor.png"), auto';
 

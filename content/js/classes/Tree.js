@@ -17,9 +17,12 @@ class Tree {
         let height = tileSize * 2;
         if (mouse.x >= x && mouse.x < x + width && mouse.y >= y && mouse.y < y + height) {
             c.style.cursor = 'url("./img/other/cursorAct.png"), auto';
-            if (mouse.leftButton === 3) {}
-            return true;
+            if (mouse.leftButton === 3) {
+                return "clicked";
+            }
+            return "hover";
         }
+        return;
     }
 
     draw(xOff, yOff) {
