@@ -147,7 +147,7 @@ class Map {
     }
 
     draw() {
-        let waterXPos = (0.5 + this.water.offsetX) | 0;
+        let waterXPos = Math.round(this.water.offsetX);
         ctx.drawImage(this.water.image, waterXPos, 0);
         ctx.drawImage(this.water.image, gwidth + waterXPos, 0);
         for (let x = this.startX; x < this.endX; x++) {
