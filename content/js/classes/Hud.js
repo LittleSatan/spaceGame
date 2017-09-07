@@ -109,15 +109,15 @@ class Hud {
         ctx.drawImage(this.interface, 77, 5, 4, 26, 10, 70, 4, 26); // left side health bar
         ctx.drawImage(this.interface, 77, 5, 4, 26, 10, 100, 4, 26); // left side stamina bar
 
-        ctx.drawImage(this.interface, 82, 5, 16, 26, 14, 70, scene.player.health[1], 26); // middle health bar
-        ctx.drawImage(this.interface, 82, 5, 16, 26, 14, 100, scene.player.stamina[1], 26); // middle stamina bar
+        ctx.drawImage(this.interface, 82, 5, 16, 26, 14, 70, scene.player.health[1] * 2, 26); // middle health bar
+        ctx.drawImage(this.interface, 82, 5, 16, 26, 14, 100, Math.floor(scene.player.stamina[1] * 0.7), 26); // middle stamina bar
 
-        ctx.drawImage(this.interface, 99, 5, 4, 26, 14 + scene.player.health[1], 70, 4, 26); // right side health bar
-        ctx.drawImage(this.interface, 99, 5, 4, 26, 14 + scene.player.stamina[1], 100, 4, 26); // right side stamina bar
+        ctx.drawImage(this.interface, 99, 5, 4, 26, 14 + scene.player.health[1] * 2, 70, 4, 26); // right side health bar
+        ctx.drawImage(this.interface, 99, 5, 4, 26, 14 + Math.floor(scene.player.stamina[1] * 0.7), 100, 4, 26); // right side stamina bar
 
         // sizes of health and stamina boxes are 72 x 18
         // health bar fill
-        let hpDraw = scene.player.health[0];
+        let hpDraw = scene.player.health[0] * 2;
         let hpDrawPos = 14;
         while (hpDraw > 72) {
             ctx.drawImage(this.interface, 0, 0, 72, 18, hpDrawPos, 74, 72, 18); // right side health bar
@@ -127,7 +127,7 @@ class Hud {
         ctx.drawImage(this.interface, 0, 0, hpDraw, 18, hpDrawPos, 74, hpDraw, 18); // right side health bar
 
         // stamina bar fill
-        let stDraw = scene.player.stamina[0];
+        let stDraw = Math.floor(scene.player.stamina[0] * 0.7);
         let stDrawPos = 14;
         while (stDraw > 72) {
             ctx.drawImage(this.interface, 0, 18, 72, 18, stDrawPos, 104, 72, 18); // right side health bar
@@ -137,10 +137,10 @@ class Hud {
         ctx.drawImage(this.interface, 0, 18, stDraw, 18, stDrawPos, 104, stDraw, 18); // right side health bar
 
         // draw text
-        if (mouse.x >= 11 && mouse.x <= 14 + scene.player.health[1] + 4 &&
-            mouse.y >= 70 && mouse.y <= 70 + 26) this.drawText(14 + Math.round(scene.player.health[1] * 0.5), 76, scene.player.health[0] + "/" + scene.player.health[1]);
-        if (mouse.x >= 11 && mouse.x <= 14 + scene.player.stamina[1] + 4 &&
-            mouse.y >= 100 && mouse.y <= 100 + 26) this.drawText(14 + Math.round(scene.player.stamina[1] * 0.5), 106, Math.round(scene.player.stamina[0]) + "/" + scene.player.stamina[1]);
+        if (mouse.x >= 11 && mouse.x <= 14 + scene.player.health[1] * 2 + 4 &&
+            mouse.y >= 70 && mouse.y <= 70 + 26) this.drawText(14 + Math.round(scene.player.health[1]), 76, scene.player.health[0] + "/" + scene.player.health[1]);
+        if (mouse.x >= 11 && mouse.x <= 14 + Math.floor(scene.player.stamina[1] * 0.7) + 4 &&
+            mouse.y >= 100 && mouse.y <= 100 + 26) this.drawText(14 + Math.round(Math.floor(scene.player.stamina[1] * 0.7) * 0.5), 106, Math.round(scene.player.stamina[0]) + "/" + scene.player.stamina[1]);
     }
 
 }
