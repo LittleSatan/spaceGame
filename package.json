@@ -9,7 +9,7 @@
   "author": "marissaChan",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^1.6.8",
+    "electron": "^9.1.1",
     "electron-builder": "^17.8.0"
   }
 }
